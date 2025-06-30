@@ -1,0 +1,132 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div class="container mx-auto max-w-5xl p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-blue-600 dark:text-blue-400">Student Performance Dashboard</h1>
+            <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition" aria-label="Toggle dark mode">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </button>
+        </div>
+        <div class="glass p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-xl font-semibold mb-4">Top Student</h2>
+            <div id="top-student" class="p-4 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700" role="alert"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="glass p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-4">Select Student</h2>
+                <input id="student-search" type="text" class="w-full p-3 mb-4 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100" placeholder="Search students by name or roll number" aria-label="Search students">
+                <select id="student" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100" aria-label="Select a student">
+                    <option value="">Select a student</option>
+                    <option value="Mayank">Mayank (Roll: 73)</option>
+                    <option value="Arbaz">Arbaz (Roll: 74)</option>
+                    <option value="Hussain">Hussain (Roll: 75)</option>
+                    <option value="sayeed">sayeed (Roll: 76)</option>
+                    <option value="shaad">shaad (Roll: 77)</option>
+                    <option value="shabab">shabab (Roll: 78)</option>
+                    <option value="Mehuli">Mehuli (Roll: 80)</option>
+                    <option value="Mohit">Mohit (Roll: 81)</option>
+                    <option value="Mojhaid">Mojhaid (Roll: 82)</option>
+                    <option value="Nandini">Nandini (Roll: 83)</option>
+                    <option value="Piyush">Piyush (Roll: 87)</option>
+                </select>
+                <button onclick="loadStudentDashboard()" class="mt-4 w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-200" aria-label="Load student dashboard">Load Dashboard</button>
+            </div>
+            <div class="glass p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-semibold mb-4">AI Performance Insights</h2>
+                <div id="loading" class="hidden text-center mt-4">
+                    <span class="spinner"></span> Generating Insights...
+                </div>
+                <div id="insights" class="mt-4 p-4 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 hidden" role="region" aria-live="polite"></div>
+                <button id="copy-insights" class="hidden mt-4 w-full bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-100 p-3 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500 transition duration-200" aria-label="Copy insights">Copy Insights</button>
+            </div>
+        </div>
+        <div id="student-dashboard" class="hidden glass p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-xl font-semibold mb-4">Student Dashboard</h2>
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="flex-none w-full md:w-64">
+                    <img id="student-photo" src="https://via.placeholder.com/150" alt="Student photo" class="w-32 h-32 rounded-full border border-gray-300 dark:border-gray-600 object-cover mx-auto md:mx-0">
+                    <div id="student-info" class="mt-4">
+                        <table role="grid" aria-label="Student performance data">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Roll No</td><td id="table-rollno"></td></tr>
+                                <tr><td>Sem 1 SGPA</td><td id="table-sgpa1"></td></tr>
+                                <tr><td>Sem 2 SGPA</td><td id="table-sgpa2"></td></tr>
+                                <tr><td>Sem 3 SGPA</td><td id="table-sgpa3"></td></tr>
+                                <tr><td>CGPA</td><td id="table-cgpa"></td></tr>
+                                <tr><td>Math Scores</td><td id="table-math"></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="flex-1">
+                    <div class="flex border-b border-gray-300 dark:border-gray-600 mb-4">
+                        <button class="tab-button px-4 py-2 font-semibold" data-tab="sgpa">SGPA</button>
+                        <button class="tab-button px-4 py-2 font-semibold" data-tab="cgpa-math">CGPA vs. Math</button>
+                        <button class="tab-button px-4 py-2 font-semibold" data-tab="improvement">Improvement</button>
+                    </div>
+                    <canvas id="student-chart" class="w-full" role="img" aria-label="Student performance chart"></canvas>
+                    <button onclick="downloadChart()" class="mt-4 w-full bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-100 p-3 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500 transition duration-200" aria-label="Download chart">Download Chart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
