@@ -45,6 +45,16 @@ This is a **CGPA analysis tool with personalized student dashboards**, built wit
   <img src="Screenshot_2025-06-30-18-55-28-74_254de13a4bc8758c9908fff1f73e3725.jpg" alt="DevOpsShack Banner">
 </div>
 
+
+student-dashboard/
+
+
+├── index.html        # Main HTML structure
+
+├── styles.css        # CSS with glassmorphism, animations, and table styling
+
+├── script.js         # JavaScript logic for data, charts, API, and interactions
+
 ## Technologies Used
 
  -HTML5: Structure of the web application.
