@@ -3,6 +3,19 @@
 
 This is a **CGPA analysis tool with personalized student dashboards**, built with HTML, CSS (Tailwind), JavaScript, Chart.js, and the Gemini API. It provides an interactive, visually stunning platform to analyze student academic performance, featuring student photos, tabular metrics, tabbed charts, and AI-driven insights. Designed for educational analytics, it’s a standout addition to my portfolio, showcasing data visualization, frontend development, and AI integration.
 
+### Tools and Modules 
+![](https://img.shields.io/badge/Programming_Language-HTML-orange.svg)
+![](https://img.shields.io/badge/Programming_Language-CSS-blue.svg)
+![](https://img.shields.io/badge/Programming_Language-javascript-yellow.svg)
+![](https://img.shields.io/badge/Tool_Used-Tailwind.css-red.svg)
+![](https://img.shields.io/badge/Tool_Used-canva-indigo.svg)
+![](https://img.shields.io/badge/Tool_Used-chart.js-darkpink.svg)
+![](https://img.shields.io/badge/Application-Analysis-lemon.svg)
+![](https://img.shields.io/badge/Status-Complete-green.svg)
+
+
+
+
 ## Features
 
 - **Personalized Dashboards**: Displays student photo, a sleek table with metrics (Roll No, SGPA1, SGPA2, SGPA3, CGPA, Math Scores), and tabbed charts for each student.
