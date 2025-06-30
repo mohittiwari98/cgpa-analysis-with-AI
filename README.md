@@ -64,3 +64,14 @@ student-dashboard/
 - Canvas-Confetti: Animations for high performers.
 - Gemini API: AI-driven performance insights and recommendations.
 
+### Debugging
+
+Console Errors: Check DevTools (F12) for null references or API errors. Share full error messages for support.
+
+File Loading: Ensure styles.css and script.js load (Network tab, 200 OK).
+
+Table/Charts: Verify table data (e.g., Mohit: Roll No 81, CGPA 8.55) and chart rendering.
+
+API Issues: Test the Gemini API key in Postman for errors.
+
+Accessibility: Test with a screen reader (e.g., NVDA) to ensure ARIA labels work.
