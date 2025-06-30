@@ -1,7 +1,10 @@
 # cgpa-analysis-with-AI
 
+ <div align="center">
+  <img src="Screenshot_2025-06-30-18-56-14-63_254de13a4bc8758c9908fff1f73e3725.jpg" alt="DevOpsShack Banner">
+</div>
 
-This is a **CGPA analysis tool with personalized student dashboards**, built with HTML, CSS (Tailwind), JavaScript, Chart.js, and the Gemini API. It provides an interactive, visually stunning platform to analyze student academic performance, featuring student photos, tabular metrics, tabbed charts, and AI-driven insights. Designed for educational analytics, it’s a standout addition to my portfolio, showcasing data visualization, frontend development, and AI integration.
+This is a **CGPA analysis tool with personalized student dashboards**, built with HTML, CSS (Tailwind), JavaScript, Chart.js, and the  API. It provides an interactive, visually stunning platform to analyze student academic performance, featuring student photos, tabular metrics, tabbed charts, and AI-driven insights. Designed for educational analytics, it’s a standout addition to my portfolio, showcasing data visualization, frontend development, and AI integration.
 
 ### Tools and Modules 
 ![](https://img.shields.io/badge/Programming_Language-HTML-orange.svg)
@@ -13,7 +16,9 @@ This is a **CGPA analysis tool with personalized student dashboards**, built wit
 ![](https://img.shields.io/badge/Application-Analysis-lemon.svg)
 ![](https://img.shields.io/badge/Status-Complete-green.svg)
 
-
+<div align="center">
+  <img src="Screenshot_2025-06-30-18-55-48-47_254de13a4bc8758c9908fff1f73e3725.jpg" alt="DevOpsShack Banner">
+</div>
 
 
 ## Features
@@ -36,7 +41,9 @@ This is a **CGPA analysis tool with personalized student dashboards**, built wit
 
 ## Screenshots
 
-*(Add screenshots of the dashboard, table, charts, and AI insights after deployment)*
+<div align="center">
+  <img src="Screenshot_2025-06-30-18-55-28-74_254de13a4bc8758c9908fff1f73e3725.jpg" alt="DevOpsShack Banner">
+</div>
 
 ## Technologies Used
 
