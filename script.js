@@ -16,7 +16,7 @@ const studentsData = [
     { rollNo: 87, name: "Piyush", sgpa1: 8.35, sgpa2: 7.1, sgpa3: 7.23, ygpa1: 7.72, cgpa: 7.35, mathScores: 21.33, photo: "Clorlk on Instagram.jpg" }
 ];
 //Use your own api key
-const API_KEY = "Y";
+const API_KEY = "YO";
 const API_URL = "";
 
 let chartInstance = null;
