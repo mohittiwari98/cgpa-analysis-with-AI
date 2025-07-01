@@ -17,7 +17,7 @@ const studentsData = [
 ];
 //Use your own api key
 const API_KEY = "YOUR API";
-const API_URL = "";
+const API_URL = "A";
 
 let chartInstance = null;
 let currentTab = 'sgpa';
