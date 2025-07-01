@@ -1,5 +1,5 @@
 //script file
-//use
+//use y
 const studentsData = [
     { rollNo: 73, name: "Mayank", sgpa1: 6.8, sgpa2: 6.26, sgpa3: 6.86, ygpa1: 6.55, cgpa: 6.64, mathScores: 17.3, photo: "download (1).jpg" },
     { rollNo: 74, name: "Arbaz", sgpa1: 7.4, sgpa2: 6.93, sgpa3: 7.18, ygpa1: 7.14, cgpa: 7.08, mathScores: 19.33, photo: "download (2).jpg" },
