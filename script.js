@@ -15,7 +15,7 @@ const studentsData = [
     { rollNo: 83, name: "Nandini", sgpa1: 7.71, sgpa2: 7.68, sgpa3: 8.41, ygpa1: 7.69, cgpa: 7.93, mathScores: 20, photo: "Life of a programmer 👩_💻.jpg" },
     { rollNo: 87, name: "Piyush", sgpa1: 8.35, sgpa2: 7.1, sgpa3: 7.23, ygpa1: 7.72, cgpa: 7.35, mathScores: 21.33, photo: "Clorlk on Instagram.jpg" }
 ];
-//Use y
+//Use yo
 const API_KEY = "";
 const API_URL = "";
 
