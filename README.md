@@ -1,5 +1,5 @@
 # cgpa-analysis-with-AI
-Ima
+Imag
  <div align="center">
   <img src="Screenshot_2025-06-30-18-56-14-63_254de13a4bc8758c9908fff1f73e3725.jpg" alt="DevOpsShack Banner">
 </div>
